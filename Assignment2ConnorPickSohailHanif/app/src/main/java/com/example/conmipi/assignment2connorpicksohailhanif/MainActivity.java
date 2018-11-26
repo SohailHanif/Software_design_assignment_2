@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtBrewStatus, txtWaterStatus, txtPotStatus;
     BoilerSensor b;
     WarmerPlateSensor w;
+    WaterTank waterTank;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         b = new BoilerSensor();
         w = new WarmerPlateSensor();
+        waterTank = new WaterTank();
     }
 
     public void onClickBrewBtn(){
@@ -39,12 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 else if (!w.getWarmerPlateStatus()){
                     txtPotStatus.setText("Pot is not on the warmer plate");
                 }
+                else{
+                    b.startBoiling();
+                }
             }
         });
         addWaterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                b.addWater();
+                waterTank.addWater();
             }
         });
         addPotButton.setOnClickListener(new View.OnClickListener() {

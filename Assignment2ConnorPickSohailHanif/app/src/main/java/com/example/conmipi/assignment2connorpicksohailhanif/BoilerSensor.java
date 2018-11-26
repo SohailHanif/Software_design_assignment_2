@@ -19,12 +19,4 @@ public class BoilerSensor extends SensorSuperClass {
 
         return waterAdded;
     }
-
-    public void startBoiling(){
-        //Boiler boil = new Boiler();
-    }
-
-    public void addWater(){
-        waterAdded = true;
-    }
 }

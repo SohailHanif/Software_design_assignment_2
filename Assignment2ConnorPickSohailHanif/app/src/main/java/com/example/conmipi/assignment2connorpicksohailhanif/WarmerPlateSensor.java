@@ -19,7 +19,7 @@ public class WarmerPlateSensor extends SensorSuperClass {
             sensorsOkay = false;
         }
 
-        return potAdded;
+        return sensorsOkay;
 
     }
     public void addPot(){
