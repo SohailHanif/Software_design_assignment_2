@@ -10,9 +10,10 @@ public class MainActivity extends AppCompatActivity {
 
     Button brewButton,addWaterButton,addPotButton;
     TextView txtBrewStatus, txtWaterStatus, txtPotStatus;
-    BoilerSensor b;
+    BoilerSensor boilerSensor;
     WarmerPlateSensor w;
     WaterTank waterTank;
+    Boiler boiler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +27,24 @@ public class MainActivity extends AppCompatActivity {
         txtWaterStatus = (TextView) findViewById(R.id.txtWaterStatus);
         txtPotStatus = (TextView) findViewById(R.id.txtPotStatus);
 
-        b = new BoilerSensor();
+        boilerSensor = new BoilerSensor();
         w = new WarmerPlateSensor();
         waterTank = new WaterTank();
+        boiler = new Boiler();
     }
 
-    public void onClickBrewBtn(){
+    public void onClick(){
         brewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!b.getBoilerStatus()){
+                if(!boilerSensor.getBoilerStatus()){
                     txtWaterStatus.setText("Water tank is empty");
                 }
                 else if (!w.getWarmerPlateStatus()){
                     txtPotStatus.setText("Pot is not on the warmer plate");
                 }
                 else{
-                    b.startBoiling();
+                    boiler.startBoiling();
                 }
             }
         });
@@ -50,12 +52,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 waterTank.addWater();
+                txtWaterStatus.setText("Added water");
             }
         });
         addPotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 w.addPot();
+                txtPotStatus.setText("Added pot");
             }
         });
     }
